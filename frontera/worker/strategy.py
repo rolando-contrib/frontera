@@ -20,7 +20,7 @@ from binascii import hexlify
 import six
 
 
-logger = logging.getLogger("strategy-worker")
+logger = logging.getLogger(__name__)
 
 
 class UpdateScoreStream(object):

@@ -15,7 +15,7 @@ from twisted.internet.task import LoopingCall
 from traceback import format_tb
 
 
-logger = getLogger("messagebus.kafka")
+logger = getLogger(__name__)
 
 
 class Consumer(BaseStreamConsumer):

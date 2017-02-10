@@ -9,9 +9,12 @@ from frontera.core import models
 import logging
 
 
+logger = logging.getLogger(__name__)
+
+
 class ComponentsPipelineMixin(object):
     def __init__(self, backend, middlewares=None, canonicalsolver=None, db_worker=False, strategy_worker=False):
-        self._logger_components = logging.getLogger("manager.components")
+        self._logger_components = logger.getChild("components")
 
         # Load middlewares
         self._middlewares = self._load_middlewares(middlewares)
@@ -118,7 +121,7 @@ class BaseManager(object):
         self._settings = settings or Settings()
 
         # Logger
-        self._logger = logging.getLogger("manager")
+        self._logger = logger.getChild("manager")
 
         # Log frontier manager starting
         self._logger.info('-'*80)

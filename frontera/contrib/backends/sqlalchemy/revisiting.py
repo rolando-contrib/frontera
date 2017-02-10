@@ -17,6 +17,8 @@ from frontera.utils.url import parse_domain_from_url_fast
 from six.moves import range
 
 
+logger = logging.getLogger(__name__)
+
 def utcnow_timestamp():
     d = datetime.utcnow()
     return timegm(d.timetuple())
@@ -51,7 +53,7 @@ class RevisitingQueue(BaseQueue):
     def __init__(self, session_cls, queue_cls, partitions):
         self.session = session_cls()
         self.queue_model = queue_cls
-        self.logger = logging.getLogger("sqlalchemy.revisiting.queue")
+        self.logger = logger.getChild("revisiting.queue")
         self.partitions = [i for i in range(0, partitions)]
         self.partitioner = Crc32NamePartitioner(self.partitions)
 

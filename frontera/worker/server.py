@@ -9,7 +9,7 @@ from twisted.web import server, resource
 
 from frontera.utils.async import listen_tcp
 
-logger = getLogger("cf-server")
+logger = getLogger(__name__)
 
 
 def jsonrpc_error(id, code, message, data=None):

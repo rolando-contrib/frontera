@@ -12,7 +12,7 @@ from kafka.protocol.offset import OffsetRequest
 from kafka.structs import OffsetAndMetadata
 
 
-log = logging.getLogger('offsets-fetcher')
+log = logging.getLogger(__name__)
 
 
 class OffsetsFetcherAsync(object):

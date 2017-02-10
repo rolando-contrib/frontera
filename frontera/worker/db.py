@@ -21,7 +21,7 @@ from .server import WorkerJsonRpcService
 import six
 from six.moves import map
 
-logger = logging.getLogger("db-worker")
+logger = logging.getLogger(__name__)
 
 
 class Slot(object):

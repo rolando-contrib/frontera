@@ -13,6 +13,9 @@ import six
 STATS_PREFIX = 'frontera'
 
 
+logger = getLogger(__name__)
+
+
 class StatsManager(object):
     """
         'frontera/crawled_pages_count': 489,
@@ -82,7 +85,7 @@ class FronteraScheduler(Scheduler):
         self.frontier = ScrapyFrontierManager(settings, manager)
         self._delay_on_empty = self.frontier.manager.settings.get('DELAY_ON_EMPTY')
         self._delay_next_call = 0.0
-        self.logger = getLogger('frontera.contrib.scrapy.schedulers.FronteraScheduler')
+        self.logger = logger.getChild(self.__class__.__name__)
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -126,6 +129,8 @@ class FronteraScheduler(Scheduler):
 
     def open(self, spider):
         self.frontier.set_spider(spider)
+        if hasattr(spider, 'setup_frontier'):
+            spider.setup_frontier(self.frontier)
         self.logger.info("Starting frontier")
         if not self.frontier.manager.auto_start:
             self.frontier.start()
@@ -167,7 +172,7 @@ class FronteraScheduler(Scheduler):
             return '?'
 
     def _request_is_redirected(self, request):
-        return request.meta.get(b'redirect_times', 0) > 0
+        return request.meta.get('redirect_times', 0) > 0
 
     def _get_downloader_info(self):
         downloader = self.crawler.engine.downloader

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+z# -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
 from time import time
@@ -13,6 +13,9 @@ from zmq.eventloop.zmqstream import ZMQStream
 
 from frontera.settings import Settings
 from .socket_config import SocketConfig
+
+
+logger = logging.getLogger(__name__)
 
 
 class Server(object):
@@ -75,8 +78,7 @@ class Server(object):
         self.spiders_in.on_recv(self.handle_spiders_in_recv)
         logging.basicConfig(format="%(asctime)s %(message)s",
                             datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
-        self.logger = logging.getLogger("distributed_frontera.messagebus"
-                                        ".zeromq.broker.Server")
+        self.logger = logger.getChild(self.__class__.__name__)
         self.logger.info("Using socket: {}:{}".format(socket_config.ip_addr,
                                                       socket_config.base_port))
 

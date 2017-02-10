@@ -10,8 +10,9 @@ versioneer.parentdir_prefix = 'frontera-'
 
 setup(
     name='frontera',
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    #version=versioneer.get_version() + '.post1',
+    version='0.7.1.post4',
+    #cmdclass=versioneer.get_cmdclass(),
     packages=find_packages(exclude=('tests', 'tests.*', 'examples', 'examples.*')),
     url='https://github.com/scrapinghub/frontera',
     description='A scalable frontier for web crawlers',
